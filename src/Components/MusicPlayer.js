@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+require('dotenv').config();
 
 class MusicPlayer extends Component{
     constructor(){
@@ -18,7 +19,7 @@ class MusicPlayer extends Component{
             part: "snippet",
             maxResults: 10,
             playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
-            key: "AIzaSyDmxZnPIkJrQzEg8dp7QY4aYJFr8wqwhdY"
+            key: process.env.REACT_APP_API_KEY
           },
           data => {
            const refined =  data.items.map(item => {
@@ -37,7 +38,6 @@ class MusicPlayer extends Component{
     }
 
     render(){
-
         return(
           <div>
             <p>Now Playing: {this.state.nowPlaying.title}</p>
