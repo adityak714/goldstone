@@ -22,7 +22,7 @@ class MusicPlayer extends Component {
         part: "snippet",
         maxResults: 10,
         playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
-        key: process.env.API_KEY
+        key: process.env.REACT_APP_API_KEY
       },
       data => {
         const refined = data.items.map(item => {

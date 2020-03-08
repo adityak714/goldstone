@@ -7,7 +7,7 @@ class Timer extends Component{
     constructor(){
         super();
         this.state = {
-            sessionLength: 2,
+            sessionLength: 1500,
             started: false,
             time: "25:00",
             thug: ''
