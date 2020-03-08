@@ -36,53 +36,27 @@ class ThePlayer extends Component {
   };
 
   PlayerReady = event => {
-    var looper;
-    var degrees = 0;
-
-    let rotateAnimation = (el, speed) => {
-      var elem = document.getElementById(el);
-      elem.style.transform = "rotate(" + degrees + "deg)";
-      looper = setTimeout(() => {
-        rotateAnimation("spinner", speed)
-      }, speed);
-      degrees++;
-      if (degrees > 359) {
-        degrees = 1;
-      }
-    }
-
+    
     event.target.cuePlaylist(this.props.playlistArray);
     var playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {
-      if (!this.props.playingStatus) {
-        rotateAnimation("spinner", 30)
-        event.target.playVideo();
-      } else {
-        clearInterval(looper);
-        event.target.pauseVideo();
-      }
+      !this.props.playingStatus
+        ? event.target.playVideo()
+        : event.target.pauseVideo();
     });
 
     var spinner = document.querySelector(".spinner");
     spinner.addEventListener("click", () => {
-      if(!this.props.playingStatus){
-        rotateAnimation("spinner", 30) 
-        event.target.playVideo();
-      } else{
-        clearInterval(looper);
-        event.target.pauseVideo();
-      }
+      !this.props.playingStatus
+        ? event.target.playVideo()
+        : event.target.pauseVideo();
     });
 
     var timerButton = document.getElementById("timerStarter");
     timerButton.addEventListener("click", () => {
-      if (!this.props.playingStatus) {
-        rotateAnimation("spinner", 30)
-        event.target.playVideo();
-      } else {
-        clearInterval(looper);
-        event.target.pauseVideo();
-      }
+      !this.props.playingStatus
+        ? event.target.playVideo()
+        : event.target.pauseVideo();
     });
 
     var nextbutton = document.getElementById("nextbutton");

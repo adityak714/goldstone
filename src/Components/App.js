@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MusicPlayer from './MusicPlayer';
 import Timer from './Timer';   
-import $ from 'jquery'; 
 import '../css/App.css';
 
 class App extends Component{
@@ -50,7 +49,7 @@ class App extends Component{
                 </div>
                 <div className="footer">
                     <i className="material-icons-round">email</i>
-                    <p>Copyright {new Date().getFullYear()}, <span><a href="https://github.com/sh4r10" target="_blank">SH4R10</a></span>, All Rights Reserved.</p>
+                    <p>Copyright {new Date().getFullYear()}, <span><a rel="noopener noreferrer" href="https://github.com/sh4r10" target="_blank">SH4R10</a></span>, All Rights Reserved.</p>
                     <i className="material-icons-round">info</i>
                 </div>
             </div>
