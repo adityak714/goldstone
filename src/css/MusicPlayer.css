@@ -1,0 +1,88 @@
+iframe{
+    display: none;
+}
+
+.music{
+    background: rgba(29, 41, 81,0.05);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 300ms ease-in-out;
+}
+
+.music p{
+    font-size: 1.25rem;
+    color: var(--primary);
+    opacity: 0.6;
+    text-align: center;
+}
+
+.music h3{
+    font-size: 1rem;
+    color: var(--primary);
+    text-transform: capitalize;
+    margin: 6px;
+    text-align: center;
+}
+
+.spinner{
+    position: relative;
+    min-width: 100px;
+    max-width: 120px;
+    width: 100%;
+    min-height: 100px;
+    max-height: 120px;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.hole{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(29, 41, 81, 0.95);
+  border-radius: 50%;
+}
+
+.secondhole{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #f7f7f7;
+  border-radius: 50%;
+}
+
+.button-container{
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons{
+    font-family: inherit;
+    border: 0;
+    min-width: 10px;
+    max-width: 15px;
+    width: 100%;    
+    color: var(--primary);
+    background: none;
+    cursor: pointer;
+    margin: 0 8px;
+    min-width: 20px;
+    max-width: 30px;
+    width: 100%;
+    float: left;
+}
+
+.buttons i{
+    font-size: 2.25rem;
+}

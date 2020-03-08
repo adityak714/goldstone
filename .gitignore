@@ -11,7 +11,9 @@
 # production
 /build
 
+# miscellaneous 
 /.env
+/designs
 
 # misc
 .DS_Store
