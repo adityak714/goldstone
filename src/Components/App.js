@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MusicPlayer from './MusicPlayer';
 import Timer from './Timer';   
+import Alert from './Alert';
 import '../css/App.css';
 
 class App extends Component{
@@ -36,6 +37,8 @@ class App extends Component{
     render(){
         return(
             <div className="main-container">
+                <div className="overlay"></div>
+                <Alert />
                 <div className="heading">
                     <h1>Goldstone.</h1>
                     <div>
