@@ -20,11 +20,7 @@ class MusicPlayer extends Component {
       "https://www.googleapis.com/youtube/v3/playlistItems",
       {
         part: "snippet",
-<<<<<<< HEAD
         maxResults: 50,
-=======
-        maxResults: 30,
->>>>>>> 59da665e13bcfe1616e02dbb7a3b2f6185678dbe
         playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
         key: process.env.REACT_APP_API_KEY
       },
