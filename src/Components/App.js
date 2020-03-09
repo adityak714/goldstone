@@ -15,7 +15,7 @@ class App extends Component{
     componentDidMount = () =>{
         this.setState({ 
             expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false, 
-            focusedTime: localStorage.getItem("focusedTime") 
+            focusedTime: localStorage.getItem("focusedTime") ? localStorage.getItem("focusedTime") : 0
         });
         const button = document.getElementById("toggle");
         button.addEventListener("click", () => {
