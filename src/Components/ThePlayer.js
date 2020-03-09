@@ -36,7 +36,6 @@ class ThePlayer extends Component {
   };
 
   PlayerReady = event => {
-    
     event.target.cuePlaylist(this.props.playlistArray);
     var playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {

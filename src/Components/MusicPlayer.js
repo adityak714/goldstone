@@ -20,7 +20,7 @@ class MusicPlayer extends Component {
       "https://www.googleapis.com/youtube/v3/playlistItems",
       {
         part: "snippet",
-        maxResults: 10,
+        maxResults: 30,
         playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
         key: process.env.REACT_APP_API_KEY
       },
@@ -52,7 +52,7 @@ class MusicPlayer extends Component {
   };
 
   handleVideoInfo = (videoData) => {
-    this.setState({ nowPlaying: videoData, thumbnail: `http://img.youtube.com/vi/${videoData.video_id}/0.jpg`})
+    this.setState({ nowPlaying: videoData, thumbnail: `https://img.youtube.com/vi/${videoData.video_id}/0.jpg`})
   }
 
   getPlayingStatus = status => {
