@@ -8,17 +8,20 @@ class App extends Component{
         super();
         this.state = {
             expanded: "",
-            focusedTime: ""
+            focusedTime: 0
         }
     }
 
     componentDidMount = () =>{
-        this.setState({ expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false })
+        this.setState({ 
+            expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false, 
+            focusedTime: localStorage.getItem("focusedTime") 
+        });
         const button = document.getElementById("toggle");
         button.addEventListener("click", () => {
             const cont = document.querySelector(".bulk-container");
             cont.classList.toggle("active");
-            this.setState({ expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false })
+            this.setState({ expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false, });
         })
     }
 
@@ -37,15 +40,15 @@ class App extends Component{
                     <h1>Goldstone.</h1>
                     <div>
                         <p>Time focused this week</p>
-                        <p>{localStorage.getItem("focusedTime") ? localStorage.getItem("focusedTime"):0} minutes</p>
+                        <p>{this.state.focusedTime} minutes</p>
                     </div>
                 </div>
                 <div className="bulk-container">
                     <button id="toggle">
                         <i className="material-icons-round">{this.state.expanded ? "chevron_left" : "queue_music"}</i>
                     </button>
-                    <Timer sendTimerStatus={this.getTimerStatus}/>
-                    <MusicPlayer sendFocusedTime={this.getFocusedTime}/>   
+                    <Timer sendFocusedTime={this.getFocusedTime} toMusicPlayer={this.getCommandFromTimer}/>
+                    <MusicPlayer />   
                 </div>
                 <div className="footer">
                     <i className="material-icons-round">email</i>

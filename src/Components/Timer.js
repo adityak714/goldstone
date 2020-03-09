@@ -1,20 +1,34 @@
 import React, {Component} from "react";
 import '../css/Timer.css';
+import soundfile from '../assets/session_completed.mp3';
 
-let countdown;
+let countdown, statusEvent;
 
 class Timer extends Component{
     constructor(){
         super();
         this.state = {
-            sessionLength: 1500,
+            sessionLength: 10,
             started: false,
             time: "25:00",
-            thug: ''
+        }
+    }
+
+    componentDidMount = () =>{
+        const spinner = document.querySelector(".spinner");
+        statusEvent = (val) =>{
+            const event = new CustomEvent('timerStatus',{
+                detail: {
+                    value: val
+                }
+            })
+            spinner.dispatchEvent(event);
         }
     }
 
     timer = () => {
+        statusEvent(true);
+        const audioInit = new Audio(soundfile);
         const seconds = this.state.sessionLength;
         const now = Date.now();
         const then = now + seconds * 1000;
@@ -22,7 +36,7 @@ class Timer extends Component{
             const secondsLeft = Math.round((then - Date.now())/1000);
             //check if timer should stop
             if(secondsLeft <= 0){
-                this.sessionEnded();
+                this.sessionEnded(audioInit);
             }
             this.displayCountdown(secondsLeft);
         },1000)
@@ -36,11 +50,14 @@ class Timer extends Component{
     }   
 
     clearTimer = () => {
+        statusEvent(false);
         clearInterval(countdown);
         this.setState({started: false, time: '25:00' })
     }
 
-    sessionEnded = () => {
+    sessionEnded = (audio) => {
+        statusEvent(false);
+        audio.play();
         clearInterval(countdown);
         if (localStorage.getItem('focusedTime')) {
             localStorage.setItem('focusedTime', Number(localStorage.getItem('focusedTime')) + 25)
@@ -48,8 +65,11 @@ class Timer extends Component{
         else {
             localStorage.setItem('focusedTime', 25)
         }
-        this.setState({ started: false, time: "25:00", timeFocused: localStorage.getItem("focusedTime")});
-        this.props.sendFocusedTime(this.localStorage.getItem("focusedTime"));
+        this.props.sendFocusedTime(localStorage.getItem("focusedTime"));
+        // Temp
+        setTimeout(()=>{
+            this.setState({ started: false, time: "25:00", timeFocused: localStorage.getItem("focusedTime")});
+        }, 500);
     }
 
     render(){

@@ -37,33 +37,32 @@ class ThePlayer extends Component {
 
   PlayerReady = event => {
     event.target.cuePlaylist(this.props.playlistArray);
-    var playtoggle = document.getElementById("playpause");
+    const playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {
       !this.props.playingStatus
         ? event.target.playVideo()
         : event.target.pauseVideo();
     });
 
-    var spinner = document.querySelector(".spinner");
+    const spinner = document.querySelector(".spinner");
     spinner.addEventListener("click", () => {
       !this.props.playingStatus
         ? event.target.playVideo()
         : event.target.pauseVideo();
     });
 
-    var timerButton = document.getElementById("timerStarter");
-    timerButton.addEventListener("click", () => {
-      !this.props.playingStatus
+    spinner.addEventListener("timerStatus", (e) => {
+      e.detail.value
         ? event.target.playVideo()
         : event.target.pauseVideo();
     });
 
-    var nextbutton = document.getElementById("nextbutton");
+    const nextbutton = document.getElementById("nextbutton");
     nextbutton.addEventListener("click", () => {
       event.target.nextVideo();
     });
 
-    var prevbutton = document.getElementById("prevbutton");
+    const prevbutton = document.getElementById("prevbutton");
     prevbutton.addEventListener("click", () => {
       event.target.previousVideo();
     });
