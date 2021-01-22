@@ -57,8 +57,9 @@ class Timer extends Component{
     }
 
     sessionEnded = (audio) => {
-        this.props.alertStatus(true);
-        statusEvent(false);
+        if(!JSON.parse(localStorage.getItem("preferences")).continue){
+            statusEvent(false);
+        }
         audio.play();
         clearInterval(countdown);
         if (localStorage.getItem('focusedTime')) {

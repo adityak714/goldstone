@@ -7,7 +7,7 @@ class ThePlayer extends Component {
       height: "390",
       width: "640",
       playerVars: {
-        autoplay: 0
+        autoplay: 0,
       }
     };
 
@@ -37,6 +37,9 @@ class ThePlayer extends Component {
 
   PlayerReady = event => {
     event.target.cuePlaylist(this.props.playlistArray);
+
+    event.target.setPlaybackQuality('low')
+
     const playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {
       !this.props.playingStatus

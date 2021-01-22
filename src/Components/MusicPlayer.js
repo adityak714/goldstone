@@ -11,17 +11,23 @@ class MusicPlayer extends Component {
       playingStatus: false,
       nowPlaying: "",
       vidIdArray: [],
-      spinning: false
+      spinning: false,
+      preferences: []
     };
   }
 
   componentDidMount = () => {
+
+    this.setState({
+      preferences: JSON.parse(localStorage.getItem("preferences"))
+    });
+    
     $.get(
       "https://www.googleapis.com/youtube/v3/playlistItems",
       {
         part: "snippet",
         maxResults: 50,
-        playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
+        playlistId: `${JSON.parse(localStorage.getItem('preferences')).playlistId}`,
         key: process.env.REACT_APP_API_KEY
       },
       data => {
