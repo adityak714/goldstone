@@ -9,7 +9,8 @@ class App extends Component{
         super();
         this.state = {
             expanded: "",
-            focusedTime: 0
+            focusedTime: 0,
+            showAlert: false
         }
     }
 
@@ -18,12 +19,18 @@ class App extends Component{
             expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false, 
             focusedTime: localStorage.getItem("focusedTime") 
         });
+
         const button = document.getElementById("toggle");
         button.addEventListener("click", () => {
             const cont = document.querySelector(".bulk-container");
             cont.classList.toggle("active");
             this.setState({ expanded: document.querySelector(".bulk-container").classList.contains("active") ? true : false, });
-        })
+        });
+
+        // const closeBtn = document.getElementById("alert-quitter");
+        // closeBtn.addEventListener("click", () => {
+        //     this.setState({showAlert: false});
+        // });
     }
 
     getTimerStatus = (boolean) =>{
@@ -34,11 +41,15 @@ class App extends Component{
         this.setState({focusedTime: time});
     }
 
+    setAlertStatus = (val) =>{
+        this.setState({showAlert: val});
+    }
+
     render(){
         return(
             <div className="main-container">
-                <div className="overlay"></div>
-                <Alert />
+                {/* <div id="overlay" className="overlay"></div> */}
+                {/* <Alert showAlert={this.state.showAlert}/> */}
                 <div className="heading">
                     <h1>Goldstone.</h1>
                     <div>
@@ -50,7 +61,7 @@ class App extends Component{
                     <button id="toggle">
                         <i className="material-icons-round">{this.state.expanded ? "chevron_left" : "queue_music"}</i>
                     </button>
-                    <Timer sendFocusedTime={this.getFocusedTime} toMusicPlayer={this.getCommandFromTimer}/>
+                    <Timer sendFocusedTime={this.getFocusedTime} alertStatus={this.setAlertStatus}/>
                     <MusicPlayer />   
                 </div>
                 <div className="footer">

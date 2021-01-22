@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import '../css/Timer.css';
-import soundfile from '../assets/session_completed.mp3';
+import soundfile from '../assets/session_completed.ogg';
 
 let countdown, statusEvent;
 
@@ -27,6 +27,7 @@ class Timer extends Component{
     }
 
     timer = () => {
+        this.setState({started: true});    
         statusEvent(true);
         const audioInit = new Audio(soundfile);
         const seconds = this.state.sessionLength;
@@ -46,7 +47,7 @@ class Timer extends Component{
         const minutes = Math.floor(seconds / 60);
         const remainderSeconds = seconds % 60;
         const displayedTime = `${minutes < 10 ? '0' : ''}${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
-        this.setState({time: displayedTime, started: true})
+        this.setState({time: displayedTime})
     }   
 
     clearTimer = () => {
@@ -56,6 +57,7 @@ class Timer extends Component{
     }
 
     sessionEnded = (audio) => {
+        this.props.alertStatus(true);
         statusEvent(false);
         audio.play();
         clearInterval(countdown);
