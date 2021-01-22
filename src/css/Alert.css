@@ -1,0 +1,78 @@
+.alert{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    z-index: 10;
+}
+
+.alert:after{
+    content: "";
+    display: block;
+    padding-bottom: calc(100%/(16/9));
+}
+
+.alert-content{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.exit{
+    position: absolute;
+    top: 36px;
+    right: 40px;
+    font-family: inherit;
+    border: 0;
+    min-width: 10px;
+    max-width: 15px;
+    width: 100%;    
+    color: var(--primary);
+    background: none;
+    opacity: 0.6;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.alert-content h1{
+    color: var(--primary);
+}
+
+.alert-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.alert-button{
+    font-size: 1rem;
+    font-family: inherit;
+    border: 0;
+    padding: 8px 8px;
+    min-width: 100px;
+    max-width: 140px;
+    width: 100%;    
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.alert-button.primary{
+    background: var(--primary);
+    color: #fff;
+}
+
+.alert-button.secondary{
+    background: #eee;
+    margin-left: 5px;
+    color: var(--primary);
+}
