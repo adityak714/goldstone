@@ -11,7 +11,6 @@ const App = () => {
             continue: false,
         }
         if(!localStorage.getItem("preferences")){
-            console.log("running")
             localStorage.setItem("preferences", JSON.stringify(preferences));
         }
     })
