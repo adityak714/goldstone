@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from "react-router-dom";
 import '../css/Settings.css';
+import '../css/Main.css';
 
-const Settings = () => {
+const Settings = ({darkmode, setDarkmode}) => {
 
     const [pref, setPref] =  useState({
         playlistId: "",
-        continue: false
+        continue: false,
+        darkmode: undefined
     })
 
     useEffect(()=>{
-        setPref(JSON.parse(localStorage.getItem("preferences")));
+        setPref(JSON.parse(localStorage.getItem("preferences")));;
     }, [])
 
     const inputChange = (e) => {
@@ -25,7 +26,9 @@ const Settings = () => {
         var local = JSON.parse(localStorage.getItem("preferences"));
         local.playlistId = playlistId;
         local.continue = pref.continue;
+        local.darkmode = pref.darkmode;
         localStorage.setItem("preferences", JSON.stringify(local));
+        setDarkmode(pref.darkmode);
     }
 
     const restore = (e) => {
@@ -33,9 +36,8 @@ const Settings = () => {
         localStorage.removeItem("preferences");
     }
 
-
     return (
-        <div>
+        <div className={darkmode ? "main-container dark-mode" : "main-container light-mode"}>
             <div className="settings-header">
                 <h1><a style={{"color": "var(--primary)"}} href="/"><i className="backbutton material-icons-round">arrow_back</i></a>Settings.</h1>
             </div>
@@ -47,9 +49,16 @@ const Settings = () => {
                     </div>
                     <div className="settings-item">
                         <p>Continue playing after timer</p>
-                        <div class="toggle-container">
+                        <div className="toggle-container">
                             <input id="switch" className="continueCheck" name="continue" type="checkbox" checked={pref.continue} onChange={(e) => setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
-                            <label for="switch">Toggle</label>
+                            <label htmlFor="switch">Toggle</label>
+                        </div>
+                    </div>
+                    <div className="settings-item">
+                        <p>Dark Mode</p>
+                        <div className="toggle-container">
+                            <input id="darkmode" name="darkmode" type="checkbox" checked={pref.darkmode} onChange={(e)=>setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
+                            <label htmlFor="darkmode">Toggle</label>
                         </div>
                     </div>
                     <div className="button-container">
@@ -61,7 +70,7 @@ const Settings = () => {
             <div className="footer">
                 <a href="mailto:iamsh4r10@gmail.com" target="_blank"><i className="material-icons-round">email</i></a>
                 <p>Copyright {new Date().getFullYear()}, <span><a rel="noopener noreferrer" href="https://github.com/sh4r10" target="_blank">SH4R10</a></span>, All Rights Reserved.</p>
-                <a id="paypal" target="_blank" href="https://paypal.me/sh4r10"><i class="fab fa-paypal"></i></a>
+                <a id="paypal" target="_blank" href="https://paypal.me/sh4r10"><i className="fab fa-paypal"></i></a>
             </div>
         </div>
     )

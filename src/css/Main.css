@@ -21,10 +21,26 @@ html {
 }
 
 body {
-  background: #f7f7f7;
   font-family: "EB Garamond", serif;
   font-size: 16px;
   overflow: hidden;
+}
+
+.main-container.light-mode {
+  background: #f7f7f7;
+  --primary: #111e6c;
+  --secondary: #fff;
+  --toggle: #fff;
+}
+
+.main-container.dark-mode {
+  background: #11131b;
+  --primary: #f7f7f7;
+  --secondary: #111e6c;
+}
+
+.main-container.dark-mode .bulk-container {
+  background: #25262b;
 }
 
 .main-container {
@@ -37,15 +53,6 @@ body {
     "heading heading heading"
     ". bulkCont ."
     "footer footer footer";
-}
-
-.overlay {
-  background: #eee;
-  opacity: 0.7;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 9;
 }
 
 .heading {
@@ -63,8 +70,10 @@ body {
   font-weight: 700;
 }
 
-.heading div {
+.heading div,
+.heading div p {
   font-size: 1.25rem;
+  color: var(--primary);
   text-align: center;
 }
 
@@ -175,5 +184,11 @@ body {
 
   .bulk-container.active {
     max-width: 600px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .main-container {
+    background: #f00;
   }
 }
