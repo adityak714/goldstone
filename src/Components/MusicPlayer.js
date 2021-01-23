@@ -27,7 +27,7 @@ class MusicPlayer extends Component {
       {
         part: "snippet",
         maxResults: 50,
-        playlistId: `${JSON.parse(localStorage.getItem('preferences')).playlistId}`,
+        playlistId: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
         key: process.env.REACT_APP_API_KEY
       },
       data => {
