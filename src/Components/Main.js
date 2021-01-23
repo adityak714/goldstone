@@ -46,7 +46,7 @@ export default class Main extends Component {
                     <MusicPlayer />   
                 </div>
                 <div className="footer">
-                    <a href="mailto:iamsh4r10@gmail.com" target="_blank"><i className="material-icons-round">email</i></a>
+                    <a href="mailto:iamsh4r10@gmail.com" rel="noopener noreferrer" target="_blank"><i className="material-icons-round">email</i></a>
                     <p>Copyright {new Date().getFullYear()}, <span><a rel="noopener noreferrer" href="https://github.com/sh4r10" target="_blank">SH4R10</a></span>, All Rights Reserved.</p>
                     <Link id="settings" to="/settings"><i className="material-icons-round">settings</i></Link>
                 </div>

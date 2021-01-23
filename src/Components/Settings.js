@@ -68,9 +68,9 @@ const Settings = ({darkmode, setDarkmode}) => {
                 </form>
             </div>
             <div className="footer">
-                <a href="mailto:iamsh4r10@gmail.com" target="_blank"><i className="material-icons-round">email</i></a>
+                <a href="mailto:iamsh4r10@gmail.com" target="_blank" rel="noopener noreferrer"><i className="material-icons-round">email</i></a>
                 <p>Copyright {new Date().getFullYear()}, <span><a rel="noopener noreferrer" href="https://github.com/sh4r10" target="_blank">SH4R10</a></span>, All Rights Reserved.</p>
-                <a id="paypal" target="_blank" href="https://paypal.me/sh4r10"><i className="fab fa-paypal"></i></a>
+                <a id="paypal" target="_blank" href="https://paypal.me/sh4r10" rel="noopener noreferrer"><i className="fab fa-paypal"></i></a>
             </div>
         </div>
     )
