@@ -28,13 +28,17 @@ export default class Main extends Component {
         });
     }
 
+    getFocusedTime = (time) =>{
+        this.setState({focusedTime: time});
+    }
+
     render() {
         return (
             <div className={this.props.darkmode ? "main-container dark-mode" : "main-container light-mode"}>
                 <div className="heading">
                     <h1>Goldstone.</h1>
                     <div className="focusedTime">
-                        <p>Time focused this week</p>
+                        <p>Total Focused Time</p>
                         <p>{this.state.focusedTime} minutes</p>
                     </div>
                 </div>
@@ -42,7 +46,7 @@ export default class Main extends Component {
                     <button id="toggle">
                         <i className="material-icons-round">{this.state.expanded ? "chevron_left" : "queue_music"}</i>
                     </button>
-                    <Timer />
+                    <Timer sendFocusedTime={this.getFocusedTime}/>
                     <MusicPlayer />   
                 </div>
                 <div className="footer">
