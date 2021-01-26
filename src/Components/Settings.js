@@ -6,8 +6,9 @@ const Settings = ({darkmode, setDarkmode}) => {
 
     const [pref, setPref] =  useState({
         playlistId: "",
-        continue: false,
-        darkmode: undefined
+        continue: '',
+        shuffle: '',
+        darkmode: ''
     })
 
     useEffect(()=>{
@@ -26,6 +27,7 @@ const Settings = ({darkmode, setDarkmode}) => {
         var local = JSON.parse(localStorage.getItem("preferences"));
         local.playlistId = playlistId;
         local.continue = pref.continue;
+        local.shuffle = pref.shuffle;
         local.darkmode = pref.darkmode;
         localStorage.setItem("preferences", JSON.stringify(local));
         setDarkmode(pref.darkmode);
@@ -52,6 +54,13 @@ const Settings = ({darkmode, setDarkmode}) => {
                         <div className="toggle-container">
                             <input id="switch" className="continueCheck" name="continue" type="checkbox" checked={pref.continue} onChange={(e) => setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
                             <label htmlFor="switch">Toggle</label>
+                        </div>
+                    </div>
+                    <div className="settings-item">
+                        <p>Shuffle</p>
+                        <div className="toggle-container">
+                            <input id="shuffle" name="shuffle" type="checkbox" checked={pref.shuffle} onChange={(e) => setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
+                            <label htmlFor="shuffle">Toggle</label>
                         </div>
                     </div>
                     <div className="settings-item">

@@ -39,7 +39,7 @@ class MusicPlayer extends Component {
           };
         });
 
-        const finalData = this.shuffle(refined);
+        const finalData = JSON.parse(localStorage.getItem("preferences")).shuffle ? this.shuffle(refined) : refined;
         const vidIdArray = finalData.map(vid => vid.videoId);
         this.setState({vidIdArray: vidIdArray });
       }

@@ -18,6 +18,7 @@ const App = () => {
         const preferences= {
             playlistId: "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
             continue: false,
+            shuffle: true,
             darkmode: darkMode,
         }
         if(!localStorage.getItem("preferences")){
