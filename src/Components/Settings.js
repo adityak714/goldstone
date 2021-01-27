@@ -40,12 +40,11 @@ const Settings = ({darkmode, setDarkmode}) => {
         e.preventDefault();
         
         // Button Animation
-        
-        // setTimeout(()=>{
-        //     btn.style.color = "var(--secondary";
-        //     btn.innerHTML = "Save Changes";
-        //     btn.style.background ="var(--primary)";
-        // }, 700)
+        const btn = document.querySelector(".btn.btn-primary");
+        btn.style.color = "#fff";
+        btn.innerHTML = '<span class="material-icons">done</span>';
+        btn.style.background = "var(--success)";
+        setSaved(true);
 
         // Link Stripping
         var link = pref.playlistId.split("=");
@@ -62,13 +61,6 @@ const Settings = ({darkmode, setDarkmode}) => {
 
         // Dark Mode Setting
         setDarkmode(pref.darkmode);
-        setTimeout(()=>{
-            const btn = document.querySelector(".btn.btn-primary");
-            btn.style.color = "#fff";
-            btn.innerHTML = '<span class="material-icons">done</span>';
-            btn.style.background = "var(--success)";
-            setSaved(true);
-        }, 100)
     }
 
     const restore = (e) => {
@@ -85,7 +77,7 @@ const Settings = ({darkmode, setDarkmode}) => {
                 <form className="settings-form" onSubmit={submit}>
                     <div className="settings-item">
                         <p>Youtube Playlist URL</p>
-                        <input className="playlistLink" name="playlistId" type="text" placeholder="URL" value={pref.playlistId} onChange={inputChange} />
+                        <input className="playlistLink" name="playlistId" type="text" placeholder="URL" value={pref.playlistId} onClick={(e) => e.target.select()} onChange={inputChange} />
                     </div>
                     <div className="settings-item">
                         <p>Continue playing after timer</p>
