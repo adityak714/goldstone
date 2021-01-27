@@ -34,7 +34,6 @@ class MusicPlayer extends Component {
         const refined = data.items.map(item => {
           return {
             title: item.snippet.title,
-            thumbnail: item.snippet.thumbnails.default.url,
             videoId: item.snippet.resourceId.videoId
           };
         });
@@ -44,7 +43,7 @@ class MusicPlayer extends Component {
         this.setState({vidIdArray: vidIdArray });
       }
     );
-  };
+  }
 
   shuffle = array => {
     var i = array.length, j = 0, temp;
