@@ -116,12 +116,13 @@ h1 {
   padding: 8px 20px;
   font-size: 14px;
   background: none;
+  width: 150px;
   color: #ff5722;
   border: 2px solid #ff5722;
   margin-right: 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.2s ease-in-out;
 }
 
 .btn:hover {
@@ -136,6 +137,18 @@ h1 {
   background: var(--primary);
   border: none;
   color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn span {
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #fff;
+  vertical-align: center;
 }
 
 #paypal i {

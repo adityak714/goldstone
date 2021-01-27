@@ -11,26 +11,64 @@ const Settings = ({darkmode, setDarkmode}) => {
         darkmode: ''
     })
 
+    const [saved, setSaved] = useState(true);
+
     useEffect(()=>{
         setPref(JSON.parse(localStorage.getItem("preferences")));;
     }, [])
 
     const inputChange = (e) => {
+        setSaved(false);
         setPref(({...pref, [e.target.name]: e.target.value}));
     }
 
+    const checkChange = e => {
+        setSaved(false);
+        setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))
+    }
+
+    useEffect(()=>{
+        if(!saved){
+            const btn = document.querySelector(".btn.btn-primary");
+            btn.style.color = "var(--secondary";
+            btn.innerHTML = "Save Changes";
+            btn.style.background ="var(--primary)";
+        }
+    })
+
     const submit = (e) => {
         e.preventDefault();
+        
+        // Button Animation
+        
+        // setTimeout(()=>{
+        //     btn.style.color = "var(--secondary";
+        //     btn.innerHTML = "Save Changes";
+        //     btn.style.background ="var(--primary)";
+        // }, 700)
+
+        // Link Stripping
         var link = pref.playlistId.split("=");
         const playlistId = link.pop();
         setPref(({...pref, playlistId: playlistId}));
+
+        // SavingLocal Storage 
         var local = JSON.parse(localStorage.getItem("preferences"));
         local.playlistId = playlistId;
         local.continue = pref.continue;
         local.shuffle = pref.shuffle;
         local.darkmode = pref.darkmode;
         localStorage.setItem("preferences", JSON.stringify(local));
+
+        // Dark Mode Setting
         setDarkmode(pref.darkmode);
+        setTimeout(()=>{
+            const btn = document.querySelector(".btn.btn-primary");
+            btn.style.color = "#fff";
+            btn.innerHTML = '<span class="material-icons">done</span>';
+            btn.style.background = "var(--success)";
+            setSaved(true);
+        }, 100)
     }
 
     const restore = (e) => {
@@ -52,21 +90,21 @@ const Settings = ({darkmode, setDarkmode}) => {
                     <div className="settings-item">
                         <p>Continue playing after timer</p>
                         <div className="toggle-container">
-                            <input id="switch" className="continueCheck" name="continue" type="checkbox" checked={pref.continue} onChange={(e) => setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
+                            <input id="switch" className="continueCheck" name="continue" type="checkbox" checked={pref.continue} onChange={checkChange} />
                             <label htmlFor="switch">Toggle</label>
                         </div>
                     </div>
                     <div className="settings-item">
                         <p>Shuffle</p>
                         <div className="toggle-container">
-                            <input id="shuffle" name="shuffle" type="checkbox" checked={pref.shuffle} onChange={(e) => setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
+                            <input id="shuffle" name="shuffle" type="checkbox" checked={pref.shuffle} onChange={checkChange} />
                             <label htmlFor="shuffle">Toggle</label>
                         </div>
                     </div>
                     <div className="settings-item">
                         <p>Dark Mode</p>
                         <div className="toggle-container">
-                            <input id="darkmode" name="darkmode" type="checkbox" checked={pref.darkmode} onChange={(e)=>setPref(({...pref, [e.currentTarget.name]: e.currentTarget.checked}))} />
+                            <input id="darkmode" name="darkmode" type="checkbox" checked={pref.darkmode} onChange={checkChange} />
                             <label htmlFor="darkmode">Toggle</label>
                         </div>
                     </div>

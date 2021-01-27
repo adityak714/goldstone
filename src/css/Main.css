@@ -1,7 +1,3 @@
-:root {
-  --primary: #111e6c;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -31,12 +27,14 @@ body {
   --primary: #111e6c;
   --secondary: #fff;
   --toggle: #fff;
+  --success: #4caf50;
 }
 
 .main-container.dark-mode {
   background: #11131b;
   --primary: #f7f7f7;
   --secondary: #111e6c;
+  --success: #00c853;
 }
 
 .main-container.dark-mode .bulk-container {
