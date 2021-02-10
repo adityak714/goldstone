@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ThePlayer from './ThePlayer'
-import axios from 'axios';
 import '../css/MusicPlayer.css';
 require('dotenv').config();
 
@@ -22,26 +21,31 @@ class MusicPlayer extends Component {
       preferences: JSON.parse(localStorage.getItem("preferences"))
     });
 
-    axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
-      params: {
-        part: "snippet",
-        maxResults: 50,
-        playlistId: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
-        key: process.env.REACT_APP_API_KEY
-      }
-    })
-    .then(res => {
-      const refined = res.data.items.map(item => {
-        return {
-          title: item.snippet.title,
-          videoId: item.snippet.resourceId.videoId
-        }});
-        
-        const finalData = JSON.parse(localStorage.getItem("preferences")).shuffle ? this.shuffle(refined) : refined;
-        const vidIdArray = finalData.map(vid => vid.videoId);
-        this.setState({vidIdArray: vidIdArray })
-    })
-    .catch(err=>console.log(err));
+    const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+    const params = {
+      part: "snippet",
+      maxResults: 50,
+      playlistId: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
+      key: process.env.REACT_APP_API_KEY
+    }
+    Object.keys(params).forEach(key=>url.searchParams.append(key, params[key]));
+
+    const options = {
+      method: 'GET'
+    }
+
+     fetch(url, options)
+      .then(data=>data.json())
+      .then(res=>{
+        const refined = res.items.map(item => {
+          return {
+            title: item.snippet.title,
+            videoId: item.snippet.resourceId.videoId
+          }});
+          const finalData = JSON.parse(localStorage.getItem("preferences")).shuffle ? this.shuffle(refined) : refined;
+          const vidIdArray = finalData.map(vid => vid.videoId);
+          this.setState({vidIdArray: vidIdArray })
+      }).catch(err=>console.log(err));
   }
 
   shuffle = array => {
