@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ThePlayer from './ThePlayer'
-import $ from 'jquery';
+import axios from 'axios';
 import '../css/MusicPlayer.css';
 require('dotenv').config();
 
@@ -21,28 +21,27 @@ class MusicPlayer extends Component {
     this.setState({
       preferences: JSON.parse(localStorage.getItem("preferences"))
     });
-    
-    $.get(
-      "https://www.googleapis.com/youtube/v3/playlistItems",
-      {
+
+    axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
+      params: {
         part: "snippet",
         maxResults: 50,
         playlistId: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
         key: process.env.REACT_APP_API_KEY
-      },
-      data => {
-        const refined = data.items.map(item => {
-          return {
-            title: item.snippet.title,
-            videoId: item.snippet.resourceId.videoId
-          };
-        });
-
+      }
+    })
+    .then(res => {
+      const refined = res.data.items.map(item => {
+        return {
+          title: item.snippet.title,
+          videoId: item.snippet.resourceId.videoId
+        }});
+        
         const finalData = JSON.parse(localStorage.getItem("preferences")).shuffle ? this.shuffle(refined) : refined;
         const vidIdArray = finalData.map(vid => vid.videoId);
-        this.setState({vidIdArray: vidIdArray });
-      }
-    );
+        this.setState({vidIdArray: vidIdArray })
+    })
+    .catch(err=>console.log(err));
   }
 
   shuffle = array => {
