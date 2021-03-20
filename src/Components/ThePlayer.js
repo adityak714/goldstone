@@ -2,6 +2,13 @@ import React,{Component} from "react";
 import YouTube from 'react-youtube';
 
 class ThePlayer extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      'volume': 50
+    };
+  }
+
   render() {
     const opts = {
       height: "390",
@@ -38,7 +45,13 @@ class ThePlayer extends Component {
   PlayerReady = event => {
     event.target.cuePlaylist(this.props.playlistArray);
 
-    event.target.setPlaybackQuality('low')
+    event.target.setPlaybackQuality('low');
+
+    const setVolume = (vol) => {
+      event.target.setVolume(vol);
+    }
+
+    setVolume(this.state.volume);
 
     const playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {
@@ -69,6 +82,34 @@ class ThePlayer extends Component {
     prevbutton.addEventListener("click", () => {
       event.target.previousVideo();
     });
+
+    document.addEventListener("keydown", (e)=>{
+      switch(e.code){
+        case "ArrowUp":
+          this.setState(prev => {
+            if(prev.volume != 100){
+              setVolume(prev.volume +5);
+              return ({
+                'volume': prev.volume+5
+              });
+            }
+          });
+          break;
+        case "ArrowDown":
+          this.setState(prev => {
+            if(prev.volume != 0){
+              setVolume(prev.volume-5);
+              return ({
+                'volume': prev.volume-5
+              });
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    })
+
   };
 }
 export default ThePlayer;
