@@ -10,6 +10,7 @@ export default class Main extends Component {
         this.state = {
             expanded: "",
             focusedTime: 0,
+            playerReady: false
         }
     }
 
@@ -32,6 +33,10 @@ export default class Main extends Component {
         this.setState({focusedTime: time});
     }
 
+    setPlayerStatus = status => {
+        this.setState({playerReady:status});
+      }
+
     render() {
         return (
             <div className={this.props.darkmode ? "main-container dark-mode" : "main-container light-mode"}>
@@ -46,8 +51,8 @@ export default class Main extends Component {
                     <button id="toggle">
                         <i className="material-icons-round">{this.state.expanded ? "chevron_left" : "queue_music"}</i>
                     </button>
-                    <Timer sendFocusedTime={this.getFocusedTime}/>
-                    <MusicPlayer />   
+                    <Timer sendFocusedTime={this.getFocusedTime} playerReady={this.state.playerReady}/>
+                    <MusicPlayer setPlayerStatus = {this.setPlayerStatus}/>   
                 </div>
                 <div className="footer">
                     <a href="mailto:iamsh4r10@gmail.com" rel="noopener noreferrer" target="_blank"><i className="material-icons-round">email</i></a>

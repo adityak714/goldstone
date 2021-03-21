@@ -9,55 +9,15 @@ class MusicPlayer extends Component {
     this.state = {
       playingStatus: false,
       nowPlaying: "",
-      vidIdArray: [],
-      spinning: false,
       preferences: []
     };
   }
 
   componentDidMount = () => {
-
     this.setState({
       preferences: JSON.parse(localStorage.getItem("preferences"))
     });
-
-    const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
-    const params = {
-      part: "snippet",
-      maxResults: 50,
-      playlistId: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
-      key: process.env.REACT_APP_API_KEY
-    }
-    Object.keys(params).forEach(key=>url.searchParams.append(key, params[key]));
-
-    const options = {
-      method: 'GET'
-    }
-
-     fetch(url, options)
-      .then(data=>data.json())
-      .then(res=>{
-        const refined = res.items.map(item => {
-          return {
-            title: item.snippet.title,
-            videoId: item.snippet.resourceId.videoId
-          }});
-          const finalData = JSON.parse(localStorage.getItem("preferences")).shuffle ? this.shuffle(refined) : refined;
-          const vidIdArray = finalData.map(vid => vid.videoId);
-          this.setState({vidIdArray: vidIdArray })
-      }).catch(err=>console.log(err));
   }
-
-  shuffle = array => {
-    var i = array.length, j = 0, temp;
-    while (i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
-  };
 
   handleVideoInfo = (videoData) => {
     this.setState({ nowPlaying: videoData, thumbnail: `https://img.youtube.com/vi/${videoData.video_id}/0.jpg`})
@@ -94,10 +54,10 @@ class MusicPlayer extends Component {
         </div>
         <ThePlayer
           videoId={this.state.nowPlaying.videoId}
-          playlistArray={this.state.vidIdArray}
           playingStatus={this.state.playingStatus}
           sendVideoInfo={this.handleVideoInfo}
           sendStatus = {this.getPlayingStatus}
+          playerReady = {this.props.setPlayerStatus}
         />
       </div>
     );

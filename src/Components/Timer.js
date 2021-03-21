@@ -27,20 +27,28 @@ class Timer extends Component{
     }
 
     timer = () => {
-        this.setState({started: true});    
-        statusEvent(true);
-        const audioInit = new Audio(soundfile);
-        const seconds = this.state.sessionLength;
-        const now = Date.now();
-        const then = now + seconds * 1000;
-        countdown = setInterval(()=>{
-            const secondsLeft = Math.round((then - Date.now())/1000);
-            //check if timer should stop
-            if(secondsLeft <= 0){
-                this.sessionEnded(audioInit);
-            }
-            this.displayCountdown(secondsLeft);
-        },1000)
+        if(this.props.playerReady){
+            this.setState({started: true});    
+            statusEvent(true);
+            const audioInit = new Audio(soundfile);
+            const seconds = this.state.sessionLength;
+            const now = Date.now();
+            const then = now + seconds * 1000;
+            countdown = setInterval(()=>{
+                const secondsLeft = Math.round((then - Date.now())/1000);
+                //check if timer should stop
+                if(secondsLeft <= 0){
+                    this.sessionEnded(audioInit);
+                }
+                this.displayCountdown(secondsLeft);
+            },1000)
+        }
+        else{
+            setTimeout(()=>{
+                this.timer();
+                console.log("waited");
+            },1000);
+        }
     }
 
     displayCountdown = (seconds) =>{

@@ -43,21 +43,29 @@ class ThePlayer extends Component {
   };
 
   PlayerReady = event => {
-    event.target.cuePlaylist(this.props.playlistArray);
-
+    event.target.cuePlaylist({
+      listType: 'playlist',
+      list: localStorage.getItem("preferences") ? `${JSON.parse(localStorage.getItem('preferences')).playlistId}` : "PLx65qkgCWNJIs3FPaj8JZhduXSpQ_ZfvL",
+      index: JSON.parse(localStorage.getItem('preferences')).shuffle ? Math.round(Math.random() * (10-1) + 1) : 0
+    });
     event.target.setPlaybackQuality('low');
 
     const setVolume = (vol) => {
       event.target.setVolume(vol);
     }
-
     setVolume(this.state.volume);
+
+    const setShuffle = () =>{ 
+      event.target.setShuffle(JSON.parse(localStorage.getItem('preferences')).shuffle);
+      event.target.setLoop(true);
+    }
 
     const playtoggle = document.getElementById("playpause");
     playtoggle.addEventListener("click", () => {
       !this.props.playingStatus
         ? event.target.playVideo()
         : event.target.pauseVideo();
+      setTimeout(setShuffle, 1000);
     });
 
     const spinner = document.querySelector(".spinner");
@@ -65,12 +73,14 @@ class ThePlayer extends Component {
       !this.props.playingStatus
         ? event.target.playVideo()
         : event.target.pauseVideo();
+      setTimeout(setShuffle, 1000);
     });
 
     spinner.addEventListener("timerStatus", (e) => {
       e.detail.value
         ? event.target.playVideo()
         : event.target.pauseVideo();
+      setTimeout(setShuffle, 1000);
     });
 
     const nextbutton = document.getElementById("nextbutton");
@@ -108,8 +118,8 @@ class ThePlayer extends Component {
         default:
           break;
       }
-    })
-
+    });
+    this.props.playerReady(true);
   };
 }
 export default ThePlayer;
