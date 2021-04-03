@@ -97,7 +97,7 @@ class ThePlayer extends Component {
       switch(e.code){
         case "ArrowUp":
           this.setState(prev => {
-            if(prev.volume != 100){
+            if(prev.volume !== 100){
               setVolume(prev.volume +5);
               return ({
                 'volume': prev.volume+5
@@ -107,7 +107,7 @@ class ThePlayer extends Component {
           break;
         case "ArrowDown":
           this.setState(prev => {
-            if(prev.volume != 0){
+            if(prev.volume !== 0){
               setVolume(prev.volume-5);
               return ({
                 'volume': prev.volume-5
