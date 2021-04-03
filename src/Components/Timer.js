@@ -46,7 +46,6 @@ class Timer extends Component{
         else{
             setTimeout(()=>{
                 this.timer();
-                console.log("waited");
             },1000);
         }
     }
