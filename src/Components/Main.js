@@ -31,7 +31,7 @@ export default class Main extends Component {
         // Disable console logs in production
         if(process.env.REACT_APP_DEBUG !== "TRUE"){
             if(!window.console) window.console = {};
-            var methods = ["log", "debug", "warn", "info"];
+            var methods = ["log", "debug", "warn", "info", "error"];
             for(var i=0;i<methods.length;i++){
                 console[methods[i]] = function(){};
             }
