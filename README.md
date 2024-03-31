@@ -1,5 +1,7 @@
 # Project Goldstone
 
+> **Upcoming Feature:** Authenticating with your Spotify account, and selecting a Spotify playlist of your choice, to go with the Pomodoro Timer. To be implemented soon.
+
 **The Idea**
 
 The idea of Goldstone is to provide an easily accessible Pomodoro timer along with quality study music, in an attempt to reduce the resistance of starting to work. The Pomodoro technique has been scientifically proven to increase productivity, and along with being an essential component of goldstone is also the inspiration for the idea. 
@@ -25,7 +27,5 @@ In order to get to the settings press the cog wheel in the bottom right on the h
 In order to change the playlist, simply paste in the link to a YouTube playlist of your choice, make sure that the playlist is public or else the program will not work as intended. 
 
 In the settings, you can also chose to continue playing music even after the timer has run out. You can also chose to play the playlist in the correct order instead of shuffling it, and you can easily switch between the light and dark mode.  
-
-
 
 *Make sure to save changes before leaving the page!*
