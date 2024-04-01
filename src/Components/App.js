@@ -4,6 +4,10 @@ import Main from "./Main";
 import Settings from "./Settings";
 
 const App = () => {
+    const [signedIn, setSignedIn] = useState(() => {
+        return false;
+    });
+
     const [darkMode, setDarkmode] = useState(()=>{
         if(localStorage.getItem("preferences")){
             return JSON.parse(localStorage.getItem("preferences")).darkmode;

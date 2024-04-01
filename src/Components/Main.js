@@ -3,6 +3,7 @@ import MusicPlayer from './MusicPlayer';
 import Timer from './Timer';   
 import {Link} from 'react-router-dom';
 import '../css/Main.css';
+import SpotifySignIn from './SpotifySignIn';
 
 export default class Main extends Component {
     constructor(props){
@@ -55,6 +56,9 @@ export default class Main extends Component {
                         <p>Total Focused Time</p>
                         <p>{this.state.focusedTime} minutes</p>
                     </div>
+                </div>
+                <div className="sign-in-with-spotify">
+                    <SpotifySignIn></SpotifySignIn>
                 </div>
                 <div className="bulk-container">
                     <button id="toggle">
